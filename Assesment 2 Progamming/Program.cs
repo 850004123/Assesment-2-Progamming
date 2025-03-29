@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Assessment2Task2
 {
@@ -87,9 +88,11 @@ namespace Assessment2Task2
                         break;
                     case 4:
                         // De-Allocate Room From Customer function
+                        DeAllocateRoom();
                         break;
                     case 5:
                         // display Room Alocations function;
+                        DisplayRoomAllocations();
                         break;
                     case 6:
                         Console.WriteLine("Billing Feature is Under Construction and will be added soon...!!!");
@@ -227,11 +230,69 @@ namespace Assessment2Task2
                 Console.WriteLine("Room Allocated Successfully");
                 Console.ReadLine();
 
-
             }
         }
+        // De-Allocate Room From Customer method
+        private static void DeAllocateRoom()
+        {
+            if (listofRooms.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been added yet");
+                return;
+            }
+            if (listofRoomAllocations.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been allocated yet");
+                return;
+            }
+            Console.WriteLine("Enter the Room Number to De-Allocate");
+            int roomNo = Convert.ToInt32(Console.ReadLine());
+            if (!int.TryParse(roomNo.ToString(), out roomNo))
+            {
+                Console.WriteLine("Invalid Input. Please Enter a Valid Number");
+                return;
+            }
+            if (listofRooms.Any(x => x.RoomNo == roomNo && x.IsAllocated == false))
+            {
+                Console.WriteLine("Room is not allocated");
+                return;
+            }
+            var room = listofRooms.FirstOrDefault(x => x.RoomNo == roomNo);
+            if (room != null)
+            {
+                room.IsAllocated = false;
+            }
+            var roomAllocation = listofRoomAllocations.FirstOrDefault(x => x.AllocatedRoomNo == roomNo);
+            if (roomAllocation != null)
+            {
+                listofRoomAllocations.Remove(roomAllocation);
+            }
+            Console.WriteLine("Room De-Allocated Successfully");
+            Console.ReadLine();
+        }
+
+        // Display room allocation details
+
+        private static void DisplayRoomAllocations()
+        {
+            if (listofRoomAllocations.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been allocated yet");
+                return;
+            }
+            Console.WriteLine("Room No\t\tCustomer Name");
+            foreach (var roomAllocation in listofRoomAllocations)
+            {
+                Console.WriteLine(roomAllocation.AllocatedRoomNo + "\t\t" + roomAllocation.AllocatedCustomer.CustomerName);
+            }
+        }
+        private static void Exit()
+
+
     }
-}
+} 
+    
+
 
 
 
