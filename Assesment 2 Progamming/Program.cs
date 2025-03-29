@@ -287,6 +287,16 @@ namespace Assessment2Task2
             }
         }
         private static void Exit()
+        // Ask the user if they would like to exit the  application
+        {
+            Console.WriteLine("Are you sure you want to exit the application? (y/n)");
+            string exit = Console.ReadLine();
+            if (exit == "y")
+            {
+                Environment.Exit(0);
+            }
+        }
+
 
 
     }
