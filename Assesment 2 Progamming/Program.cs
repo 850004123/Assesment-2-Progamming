@@ -83,6 +83,7 @@ namespace Assessment2Task2
                         break;
                     case 3:
                         // allocate Room To Customer function
+                        AllocateRoom();
                         break;
                     case 4:
                         // De-Allocate Room From Customer function
@@ -175,17 +176,14 @@ namespace Assessment2Task2
             {
                 Console.WriteLine("No Rooms are available for allocation");
                 return;
+            }
 
-                if (availableRooms.Count == 0)
-                {
-                    Console.WriteLine("No Rooms are available for allocation");
-                    return;
-                }
+            //Display available rooms
 
-                //Display available rooms
+            Console.WriteLine(availableRooms.Count + " Rooms are available for allocation");
 
-                Console.WriteLine("Available Rooms");
-                foreach(var Room in availableRooms)
+            {
+                foreach (var Room in availableRooms)
                 {
                     Console.WriteLine(Room.RoomNo);
                 }
@@ -228,6 +226,7 @@ namespace Assessment2Task2
 
                 Console.WriteLine("Room Allocated Successfully");
                 Console.ReadLine();
+
 
             }
         }
