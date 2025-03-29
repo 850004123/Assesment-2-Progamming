@@ -105,6 +105,7 @@ namespace Assessment2Task2
                         break;
                     case 9:
                         // Exit Application
+                        Exit();
                         break;
                     case 0:
                         // Backup
