@@ -185,11 +185,11 @@ namespace Assessment2Task2
                 //Display available rooms
 
                 Console.WriteLine("Available Rooms");
-                foreach(var room in availableRooms)
+                foreach(var Room in availableRooms)
                 {
-                    Console.WriteLine(room.RoomNo);
+                    Console.WriteLine(Room.RoomNo);
                 }
-
+                // Enter room number to allocate
                 Console.WriteLine("Enter the Room Number to Allocate");
                 int roomNo = Convert.ToInt32(Console.ReadLine());
                 if (!int.TryParse(roomNo.ToString(), out roomNo))
@@ -197,6 +197,37 @@ namespace Assessment2Task2
                     Console.WriteLine("Invalid Input. Please Enter a Valid Number");
                     return;
                 }
+
+                if (listofRooms.Any(x => x.RoomNo == roomNo && x.IsAllocated == true))
+                {
+                    Console.WriteLine("Room is already allocated");
+                    return;
+                }
+
+                // Enter customer name
+                Console.WriteLine("Enter the Customer Name");
+                string customerName = Console.ReadLine();
+                if (string.IsNullOrEmpty(customerName))
+                {
+                    Console.WriteLine("Customer Name cannot be empty");
+                    return;
+                }
+
+                // Allocate Room to the customer
+                RoomAllocation roomAllocation = new RoomAllocation();
+                roomAllocation.AllocatedRoomNo = roomNo;
+                roomAllocation.AllocatedCustomer = new Customer() { CustomerName = customerName };
+                listofRoomAllocations.Add(roomAllocation);
+
+                // Update Room status and add allocation
+                var room = listofRooms.FirstOrDefault(x => x.RoomNo == roomNo);
+                if (room != null)
+                {
+                    room.IsAllocated = true;
+                }
+
+                Console.WriteLine("Room Allocated Successfully");
+                Console.ReadLine();
 
             }
         }
