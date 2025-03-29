@@ -189,6 +189,15 @@ namespace Assessment2Task2
                 {
                     Console.WriteLine(room.RoomNo);
                 }
+
+                Console.WriteLine("Enter the Room Number to Allocate");
+                int roomNo = Convert.ToInt32(Console.ReadLine());
+                if (!int.TryParse(roomNo.ToString(), out roomNo))
+                {
+                    Console.WriteLine("Invalid Input. Please Enter a Valid Number");
+                    return;
+                }
+
             }
         }
     }
