@@ -102,6 +102,7 @@ namespace Assessment2Task2
                         break;
                     case 8:
                         //Show Room Allocations From File
+                        SaveRoomAllocationsToFile();
                         break;
                     case 9:
                         // Exit Application
@@ -297,6 +298,29 @@ namespace Assessment2Task2
                 Console.WriteLine("Thank you for using the Langham Hotel Management System");
                 Environment.Exit(0);
             }
+        }
+
+        private static void SaveRoomAllocationsToFile()
+        {
+            string filename = "lhms_850004123.txt";
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_850004123.txt");
+            if (listofRoomAllocations.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been allocated yet");
+                return;
+            }
+
+            //  Write the Room Allocations to a file
+
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                foreach (var roomAllocation in listofRoomAllocations)
+                {
+                    sw.WriteLine(roomAllocation.AllocatedRoomNo + "\t\t" + roomAllocation.AllocatedCustomer.CustomerName);
+                }
+            }
+            Console.WriteLine("Room Allocations have been saved to a file successfully");
+
         }
 
 
