@@ -87,8 +87,7 @@ namespace Assessment2Task2
                         // display Room Alocations function;
                         break;
                     case 6:
-                        // Display "Billing Feature is Under Construction and will
-                        be added soon...!!!"
+                        // Display "Billing Feature is Under Construction and will be added soon...!!!"
                 break;
                     case 7:
                         // SaveRoomAllocationsToFile
