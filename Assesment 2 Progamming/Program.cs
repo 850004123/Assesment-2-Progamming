@@ -293,6 +293,7 @@ namespace Assessment2Task2
             string exit = Console.ReadLine();
             if (exit == "y")
             {
+                Console.WriteLine("Thank you for using the Langham Hotel Management System");
                 Environment.Exit(0);
             }
         }
