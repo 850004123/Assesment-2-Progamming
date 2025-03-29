@@ -175,6 +175,20 @@ namespace Assessment2Task2
             {
                 Console.WriteLine("No Rooms are available for allocation");
                 return;
+
+                if (availableRooms.Count == 0)
+                {
+                    Console.WriteLine("No Rooms are available for allocation");
+                    return;
+                }
+
+                //Display available rooms
+
+                Console.WriteLine("Available Rooms");
+                foreach(var room in availableRooms)
+                {
+                    Console.WriteLine(room.RoomNo);
+                }
             }
         }
     }
