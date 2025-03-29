@@ -99,10 +99,11 @@ namespace Assessment2Task2
                         break;
                     case 7:
                         // SaveRoomAllocationsToFile
+                        SaveRoomAllocationsToFile();
                         break;
                     case 8:
                         //Show Room Allocations From File
-                        SaveRoomAllocationsToFile();
+                        
                         break;
                     case 9:
                         // Exit Application
@@ -302,8 +303,9 @@ namespace Assessment2Task2
 
         private static void SaveRoomAllocationsToFile()
         {
-            string filename = "lhms_850004123.txt";
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_850004123.txt");
+
+            Console.WriteLine("Saving Room Allocations to a file...");
             if (listofRoomAllocations.Count == 0)
             {
                 Console.WriteLine("No Rooms have been allocated yet");
@@ -312,12 +314,19 @@ namespace Assessment2Task2
 
             //  Write the Room Allocations to a file
 
-            using (StreamWriter sw = new StreamWriter(filePath))
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
+            
             {
+               
+
                 foreach (var roomAllocation in listofRoomAllocations)
                 {
                     sw.WriteLine(roomAllocation.AllocatedRoomNo + "\t\t" + roomAllocation.AllocatedCustomer.CustomerName);
+                    // Add timestamp to the file
+                    sw.WriteLine(DateTime.Now);
+
                 }
+
             }
             Console.WriteLine("Room Allocations have been saved to a file successfully");
 
