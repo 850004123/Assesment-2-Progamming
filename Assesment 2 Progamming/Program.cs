@@ -9,52 +9,55 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+
 namespace Assessment2Task2
 {
     // Custom Class - Room
     public class Room
     {
         public int RoomNo { get; set; }
-    public bool IsAllocated { get; set; }
+        public bool IsAllocated { get; set; }
+    }
+
     // Custom Class - Customer
     public class Customer
     {
         public int CustomerNo { get; set; }
         public string CustomerName { get; set; }
-        }
+    }
+
     // Custom Class - RoomAllocation
     public class RoomAllocation
     {
         public int AllocatedRoomNo { get; set; }
-        public Customer AllocatedCustome { get; set; }
+        public Customer AllocatedCustomer { get; set; }
     }
+
     // Custom Main Class - Program
     class Program
     {
         // Variables declaration and initialization
-        public static List <Room> listofRooms = new List<Room>();
-            public static List <RoomAllocation> listofRoomAllocations = new List<RoomAllocation>();
-            public static string filePath;
-            public static string backupFilePath;
+        public static List<Room> listofRooms = new List<Room>();
+        public static List<RoomAllocation> listofRoomAllocations = new List<RoomAllocation>();
+        public static string filePath;
+        public static string backupFilePath;
 
-            // Main function
-            static void Main(string[] args)
+        // Main function
+        static void Main(string[] args)
         {
-            string folderPath =
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             filePath = Path.Combine(folderPath, "HotelManagement.txt");
             char ans;
             do
             {
                 Console.Clear();
-                Console.WriteLine("****************************************************************
-                * ******************");
-                Console.WriteLine(" LANGHAM HOTEL MANAGEMENT SYSTEM
-                ");
-                Console.WriteLine(" MENU
-                ");
-                Console.WriteLine("****************************************************************
-                * ******************");
+                Console.WriteLine("****************************************************************");
+                Console.WriteLine("******************");
+                Console.WriteLine(" LANGHAM HOTEL MANAGEMENT SYSTEM");
+                Console.WriteLine(" MENU");
+                Console.WriteLine("****************************************************************");
+                Console.WriteLine("******************");
                 Console.WriteLine("1. Add Rooms");
                 Console.WriteLine("2. Display Rooms");
                 Console.WriteLine("3. Allocate Rooms");
@@ -64,15 +67,15 @@ namespace Assessment2Task2
                 Console.WriteLine("7. Save the Room Allocations To a File");
                 Console.WriteLine("8. Show the Room Allocations From a File");
                 Console.WriteLine("9. Exit");
-                // Add new option 0 for Backup
-                Console.WriteLine("****************************************************************
-                * ******************");
+                Console.WriteLine("0. Backup");
+                Console.WriteLine("****************************************************************");
+                Console.WriteLine("******************");
                 Console.Write("Enter Your Choice Number Here:");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        // adding Rooms function
+                        AddRooms();
                         break;
                     case 2:
                         // display Rooms function;
@@ -87,8 +90,8 @@ namespace Assessment2Task2
                         // display Room Alocations function;
                         break;
                     case 6:
-                        // Display "Billing Feature is Under Construction and will be added soon...!!!"
-                break;
+                        Console.WriteLine("Billing Feature is Under Construction and will be added soon...!!!");
+                        break;
                     case 7:
                         // SaveRoomAllocationsToFile
                         break;
@@ -98,12 +101,62 @@ namespace Assessment2Task2
                     case 9:
                         // Exit Application
                         break;
+                    case 0:
+                        // Backup
+                        break;
                     default:
+                        Console.WriteLine("Invalid Input. Please Enter a Valid Number");
                         break;
                 }
-                Console.Write("\nWould You Like To Continue(Y/N):");
-                ans = Convert.ToChar(Console.ReadLine());
+                Console.Write("Do you want to continue? (y/n): ");
+                ans = Convert.ToChar(Console.ReadLine() ?? "n");
+
             } while (ans == 'y' || ans == 'Y');
         }
+
+        private static void AddRooms()
+
+        {
+
+            try
+            {
+                Console.WriteLine("Enter the total numbers of rooms to add");
+                int totalRooms = Convert.ToInt32(Console.ReadLine());
+
+                for (int i = 1; i <= totalRooms; i++)
+                {
+                    Room room = new Room();
+                    room.RoomNo = i;
+                    room.IsAllocated = false;
+                    listofRooms.Add(room);
+
+                    {
+                        Console.WriteLine("Room Added Successfully");
+
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid Input. Please Enter a Valid Number");
+        }   }
+
+            private static void DisplayRooms()
+        {
+            if (listofRooms.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been added yet");
+                return;
+            }
+
+        }
+        
+        }
     }
-}
+
+
+
+
+
+
+
