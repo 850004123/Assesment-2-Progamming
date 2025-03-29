@@ -23,20 +23,22 @@ namespace Assessment2Task2
         public string CustomerName { get; set; }
         }
     // Custom Class - RoomAllocation
-    public class RoomlAllocaltion
+    public class RoomAllocation
     {
-        public int AllocatedRoomNo()
-    public Customer AllocatedCustomer()
+        public int AllocatedRoomNo { get; set; }
+        public Customer AllocatedCustome { get; set; }
     }
     // Custom Main Class - Program
     class Program
     {
         // Variables declaration and initialization
-        public static Room[] listofRooms;
-        public static int[] listOfRoomlAllocaltions;
-        public static string filePath;
-        // Main function
-        static void Main(string[] args)
+        public static List <Room> listofRooms = new List<Room>();
+            public static List <RoomAllocation> listofRoomAllocations = new List<RoomAllocation>();
+            public static string filePath;
+            public static string backupFilePath;
+
+            // Main function
+            static void Main(string[] args)
         {
             string folderPath =
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
