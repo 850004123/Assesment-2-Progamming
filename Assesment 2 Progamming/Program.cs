@@ -14,15 +14,14 @@ namespace Assessment2Task2
     // Custom Class - Room
     public class Room
     {
-        public int RoomNo()
-    public bool IsAllocated()
-    }
+        public int RoomNo { get; set; }
+    public bool IsAllocated { get; set; }
     // Custom Class - Customer
     public class Customer
     {
-        public int CustomerNo()
-    public string CustomerName()
-    }
+        public int CustomerNo { get; set; }
+        public string CustomerName { get; set; }
+        }
     // Custom Class - RoomAllocation
     public class RoomlAllocaltion
     {
