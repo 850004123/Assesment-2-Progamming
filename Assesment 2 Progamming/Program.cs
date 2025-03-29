@@ -160,8 +160,13 @@ namespace Assessment2Task2
 
         }
 
-        private static void ShowRooms()
+        private static void AllocateRoom()
         {
+            if (listofRooms.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been added yet");
+                return;
+            }
         }
     }
 }
