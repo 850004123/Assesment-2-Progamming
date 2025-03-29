@@ -317,8 +317,6 @@ namespace Assessment2Task2
             using (StreamWriter sw = new StreamWriter(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
             
             {
-               
-
                 foreach (var roomAllocation in listofRoomAllocations)
                 {
                     sw.WriteLine(roomAllocation.AllocatedRoomNo + "\t\t" + roomAllocation.AllocatedCustomer.CustomerName);
@@ -329,6 +327,7 @@ namespace Assessment2Task2
 
             }
             Console.WriteLine("Room Allocations have been saved to a file successfully");
+
 
         }
 
