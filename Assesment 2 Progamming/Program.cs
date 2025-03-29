@@ -79,6 +79,7 @@ namespace Assessment2Task2
                         break;
                     case 2:
                         // display Rooms function;
+                        DisplayRooms();
                         break;
                     case 3:
                         // allocate Room To Customer function
@@ -139,9 +140,10 @@ namespace Assessment2Task2
             catch (FormatException)
             {
                 Console.WriteLine("Invalid Input. Please Enter a Valid Number");
-        }   }
+            }
+        }
 
-            private static void DisplayRooms()
+        private static void DisplayRooms()
         {
             if (listofRooms.Count == 0)
             {
@@ -149,10 +151,20 @@ namespace Assessment2Task2
                 return;
             }
 
+            Console.WriteLine("Room No\t\tIsAllocated");
+            foreach (var room in listofRooms)
+            {
+                Console.WriteLine(room.RoomNo + "\t\t" + room.IsAllocated);
+            }
+
+
         }
-        
+
+        private static void ShowRooms()
+        {
         }
     }
+}
 
 
 
