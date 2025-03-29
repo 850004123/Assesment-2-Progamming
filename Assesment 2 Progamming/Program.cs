@@ -99,7 +99,7 @@ namespace Assessment2Task2
                         break;
                     case 7:
                         // SaveRoomAllocationsToFile
-                        SaveRoomAllocationsToFile();
+                        ShowRoomAllocationsFromFile();
                         break;
                     case 8:
                         //Show Room Allocations From File
@@ -327,10 +327,27 @@ namespace Assessment2Task2
 
             }
             Console.WriteLine("Room Allocations have been saved to a file successfully");
-
-
         }
-
+        private static void ShowRoomAllocationsFromFile()
+        {
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_850004123.txt");
+            Console.WriteLine("Showing Room Allocations from a file...");
+            if (listofRoomAllocations.Count == 0)
+            {
+                Console.WriteLine("No Rooms have been allocated yet");
+                return;
+            }
+            // Read the Room Allocations from a file
+            using (StreamReader sr = new StreamReader(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+            Console.WriteLine("Room Allocations have been shown from a file successfully");
+        }
 
 
     }
