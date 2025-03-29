@@ -99,11 +99,11 @@ namespace Assessment2Task2
                         break;
                     case 7:
                         // SaveRoomAllocationsToFile
-                        ShowRoomAllocationsFromFile();
+                        SaveRoomAllocationsToFile();
                         break;
                     case 8:
                         //Show Room Allocations From File
-                        
+                        ShowRoomAllocationsFromFile();
                         break;
                     case 9:
                         // Exit Application
@@ -337,7 +337,7 @@ namespace Assessment2Task2
                 Console.WriteLine("No Rooms have been allocated yet");
                 return;
             }
-            // Read the Room Allocations from a file
+            // Show the Room Allocations from a file
             using (StreamReader sr = new StreamReader(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
             {
                 string line;
