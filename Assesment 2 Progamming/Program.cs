@@ -167,6 +167,15 @@ namespace Assessment2Task2
                 Console.WriteLine("No Rooms have been added yet");
                 return;
             }
+
+            // get list of available rooms
+            var availableRooms = listofRooms.Where(x => x.IsAllocated == false).ToList();
+
+            if (availableRooms.Count == 0)
+            {
+                Console.WriteLine("No Rooms are available for allocation");
+                return;
+            }
         }
     }
 }
