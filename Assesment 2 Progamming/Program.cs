@@ -48,7 +48,7 @@ namespace Assessment2Task2
         static void Main(string[] args)
         {
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            filePath = Path.Combine(folderPath, "HotelManagement.txt");
+            filePath = Path.Combine(folderPath, "lhms_850004123");
             char ans;
             do
             {
@@ -111,6 +111,7 @@ namespace Assessment2Task2
                         break;
                     case 0:
                         // Backup
+
                         break;
                     default:
                         Console.WriteLine("Invalid Input. Please Enter a Valid Number");
@@ -315,7 +316,7 @@ namespace Assessment2Task2
             //  Write the Room Allocations to a file
 
             using (StreamWriter sw = new StreamWriter(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
-            
+
             {
                 foreach (var roomAllocation in listofRoomAllocations)
                 {
@@ -347,12 +348,28 @@ namespace Assessment2Task2
                 }
             }
             Console.WriteLine("Room Allocations have been shown from a file successfully");
+
+
+        }
+          private static void Backup()
+        {
+            
+              
         }
 
 
+
     }
-} 
-    
+}
+
+
+
+
+
+
+
+
+
 
 
 
