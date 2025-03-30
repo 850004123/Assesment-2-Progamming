@@ -41,14 +41,14 @@ namespace Assessment2Task2
         // Variables declaration and initialization
         public static List<Room> listofRooms = new List<Room>();
         public static List<RoomAllocation> listofRoomAllocations = new List<RoomAllocation>();
-        public static string filePath;
-        public static string backupFilePath;
+        public static string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_studentid.txt");
+        public static string backupFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_studentid_backup.txt");
 
         // Main function
         static void Main(string[] args)
         {
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            filePath = Path.Combine(folderPath, "lhms_850004123");
+            filePath = Path.Combine(folderPath, "lhms_850004123.txt");
             char ans;
             do
             {
@@ -111,7 +111,7 @@ namespace Assessment2Task2
                         break;
                     case 0:
                         // Backup
-
+                        Backup();
                         break;
                     default:
                         Console.WriteLine("Invalid Input. Please Enter a Valid Number");
@@ -313,6 +313,15 @@ namespace Assessment2Task2
                 return;
             }
 
+            // Ensure file exists
+
+            if (!File.Exists(filePath)) // Check if the file exists
+            {
+                File.Create(filePath).Close(); // Create the file if it does not exist
+            }
+
+
+
             //  Write the Room Allocations to a file
 
             using (StreamWriter sw = new StreamWriter(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
@@ -333,9 +342,10 @@ namespace Assessment2Task2
         {
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_850004123.txt");
             Console.WriteLine("Showing Room Allocations from a file...");
-            if (listofRoomAllocations.Count == 0)
+
+            if (!File.Exists(filePath))
             {
-                Console.WriteLine("No Rooms have been allocated yet");
+                Console.WriteLine("No saved rooms found");
                 return;
             }
             // Show the Room Allocations from a file
@@ -351,16 +361,38 @@ namespace Assessment2Task2
 
 
         }
-          private static void Backup()
+        private static void Backup()
         {
-            
-              
+            try
+            {
+                Console.WriteLine("Backing up the file...");
+                string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                backupFilePath = Path.Combine(folderPath, "lhms_850004123_backup.txt");
+                File.Copy(filePath, backupFilePath, true);
+                Console.WriteLine("File has been backed up successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred while backing up the file: " + ex.Message);
+
+            }
+
+            //Clear the original file
+            try
+            {
+                Console.WriteLine("Clearing the original file...");
+                File.WriteAllText(filePath, string.Empty);
+                Console.WriteLine("Original file has been cleared successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred while clearing the original file: " + ex.Message);
+            }
         }
-
-
-
     }
 }
+
+
 
 
 
