@@ -25,14 +25,14 @@ namespace Assessment2Task2
     public class Customer
     {
         public int CustomerNo { get; set; }
-        public string CustomerName { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
     }
 
     // Custom Class - RoomAllocation
     public class RoomAllocation
     {
         public int AllocatedRoomNo { get; set; }
-        public Customer AllocatedCustomer { get; set; }
+        public Customer AllocatedCustomer { get; set; } = new Customer();
     }
 
     // Custom Main Class - Program
@@ -117,16 +117,14 @@ namespace Assessment2Task2
                         Console.WriteLine("Invalid Input. Please Enter a Valid Number");
                         break;
                 }
-                Console.Write("Do you want to continue? (y/n): ");
-                ans = Convert.ToChar(Console.ReadLine() ?? "n");
+                       Console.Write("Do you want to continue? (y/n): ");
+                        ans = Convert.ToChar(Console.ReadLine() ?? "n");
 
-            } while (ans == 'y' || ans == 'Y');
+            }          while (ans == 'y' || ans == 'Y');
         }
 
         private static void AddRooms()
-
         {
-
             try
             {
                 Console.WriteLine("Enter the total numbers of rooms to add");
@@ -139,10 +137,7 @@ namespace Assessment2Task2
                     room.IsAllocated = false;
                     listofRooms.Add(room);
 
-                    {
-                        Console.WriteLine("Room Added Successfully");
-
-                    }
+                    Console.WriteLine("Room Added Successfully");
                 }
             }
             catch (FormatException)
@@ -164,32 +159,24 @@ namespace Assessment2Task2
             {
                 Console.WriteLine(room.RoomNo + "\t\t" + room.IsAllocated);
             }
-
-
         }
 
         private static void AllocateRoom()
         {
+            // if room count ==0 write message
             if (listofRooms.Count == 0)
             {
                 Console.WriteLine("No Rooms have been added yet");
                 return;
             }
 
-            // get list of available rooms
             var availableRooms = listofRooms.Where(x => x.IsAllocated == false).ToList();
 
-            if (availableRooms.Count == 0)
+            if (availableRooms.Count != 0)
             {
-                Console.WriteLine("No Rooms are available for allocation");
-                return;
-            }
+                //Display available rooms
+                Console.WriteLine(availableRooms.Count + " Rooms are available for allocation");
 
-            //Display available rooms
-
-            Console.WriteLine(availableRooms.Count + " Rooms are available for allocation");
-
-            {
                 foreach (var Room in availableRooms)
                 {
                     Console.WriteLine(Room.RoomNo);
@@ -233,9 +220,13 @@ namespace Assessment2Task2
 
                 Console.WriteLine("Room Allocated Successfully");
                 Console.ReadLine();
-
+            }
+            else
+            {
+                throw new InvalidOperationException("No Rooms are available for allocation.");
             }
         }
+
         // De-Allocate Room From Customer method
         private static void DeAllocateRoom()
         {
@@ -276,7 +267,6 @@ namespace Assessment2Task2
         }
 
         // Display room allocation details
-
         private static void DisplayRoomAllocations()
         {
             if (listofRoomAllocations.Count == 0)
@@ -290,9 +280,10 @@ namespace Assessment2Task2
                 Console.WriteLine(roomAllocation.AllocatedRoomNo + "\t\t" + roomAllocation.AllocatedCustomer.CustomerName);
             }
         }
+
         private static void Exit()
-        // Ask the user if they would like to exit the  application
         {
+            // Ask the user if they would like to exit the application
             Console.WriteLine("Are you sure you want to exit the application? (y/n)");
             string exit = Console.ReadLine();
             if (exit == "y")
@@ -314,30 +305,25 @@ namespace Assessment2Task2
             }
 
             // Ensure file exists
-
             if (!File.Exists(filePath)) // Check if the file exists
             {
-                File.Create(filePath).Close(); // Create the file if it does not exist
+                // Create the file if it does not exist
+                File.Create(filePath).Close();
             }
 
-
-
-            //  Write the Room Allocations to a file
-
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
-
+            // Write the Room Allocations to a file
+            using (StreamWriter sw = new StreamWriter(filePath))
             {
                 foreach (var roomAllocation in listofRoomAllocations)
                 {
                     sw.WriteLine(roomAllocation.AllocatedRoomNo + "\t\t" + roomAllocation.AllocatedCustomer.CustomerName);
                     // Add timestamp to the file
                     sw.WriteLine(DateTime.Now);
-
                 }
-
             }
             Console.WriteLine("Room Allocations have been saved to a file successfully");
         }
+
         private static void ShowRoomAllocationsFromFile()
         {
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_850004123.txt");
@@ -349,7 +335,7 @@ namespace Assessment2Task2
                 return;
             }
             // Show the Room Allocations from a file
-            using (StreamReader sr = new StreamReader(@"C:\Users\Jorda\OneDrive\Documents\lhms_850004123.txt"))
+            using (StreamReader sr = new StreamReader(filePath))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -358,9 +344,8 @@ namespace Assessment2Task2
                 }
             }
             Console.WriteLine("Room Allocations have been shown from a file successfully");
-
-
         }
+
         private static void Backup()
         {
             try
@@ -374,7 +359,6 @@ namespace Assessment2Task2
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred while backing up the file: " + ex.Message);
-
             }
 
             //Clear the original file
@@ -390,7 +374,10 @@ namespace Assessment2Task2
             }
         }
     }
+
 }
+
+
 
 
 
