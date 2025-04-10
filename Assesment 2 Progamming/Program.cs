@@ -322,6 +322,20 @@ namespace Assessment2Task2
                 }
             }
             Console.WriteLine("Room Allocations have been saved to a file successfully");
+
+            // unathorized access exception handling
+            try
+            {
+                // Check if the file is accessible
+                using (FileStream fs = File.Open(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    Console.WriteLine("File is accessible");
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine("Unauthorized access to the file: " + ex.Message);
+            }
         }
 
         private static void ShowRoomAllocationsFromFile()
