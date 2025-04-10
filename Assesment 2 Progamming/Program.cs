@@ -331,7 +331,7 @@ namespace Assessment2Task2
                 {
                     Console.WriteLine("File is accessible");
                 }
-            }
+            }// exception handling
             catch (UnauthorizedAccessException ex)
             {
                 Console.WriteLine("Unauthorized access to the file: " + ex.Message);
