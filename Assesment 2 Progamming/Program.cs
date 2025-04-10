@@ -329,10 +329,17 @@ namespace Assessment2Task2
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "lhms_850004123.txt");
             Console.WriteLine("Showing Room Allocations from a file...");
 
-            if (!File.Exists(filePath))
+            // File not found exception handling
+            try
             {
-                Console.WriteLine("No saved rooms found");
-                return;
+                if (!File.Exists(filePath))
+                {
+                    throw new FileNotFoundException("File not found");
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             // Show the Room Allocations from a file
             using (StreamReader sr = new StreamReader(filePath))
@@ -344,6 +351,7 @@ namespace Assessment2Task2
                 }
             }
             Console.WriteLine("Room Allocations have been shown from a file successfully");
+
         }
 
         private static void Backup()
